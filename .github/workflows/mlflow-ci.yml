@@ -1,0 +1,60 @@
+name: MLflow CI - retrain model
+
+on:
+  push:
+    paths:
+      - 'MLProject/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+    inputs:
+      n_estimators:
+        description: 'Number of trees'
+        required: false
+        default: '100'
+      max_depth:
+        description: 'Max depth (int)'
+        required: false
+        default: '10'
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run MLflow Project (no-conda)
+        run: |
+          # use inputs if provided (workflow_dispatch), otherwise fall back to defaults
+          N_EST="${{ github.event.inputs.n_estimators }}"
+          if [ -z "$N_EST" ]; then N_EST=100; fi
+          MAX_DEPTH="${{ github.event.inputs.max_depth }}"
+          if [ -z "$MAX_DEPTH" ]; then MAX_DEPTH=10; fi
+
+          mlflow run MLProject -P input_path=MLProject/telco_preprocessing \
+                              -P output_dir=outputs \
+                              -P n_estimators="$N_EST" \
+                              -P max_depth="$MAX_DEPTH" \
+                              --no-conda
+
+      - name: Upload trained model artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trained-model
+          path: outputs/*.pkl
+
+      - name: Upload mlruns folder (MLflow tracking data)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlruns
+          path: mlruns

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/LENOVO/Documents/Workflow-CI/mlruns/0/03da07e04f97434e89be6bc940ddee93/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 03da07e04f97434e89be6bc940ddee93
+run_name: smiling-trout-459
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758732713151
+status: 1
+tags: []
+user_id: LENOVO

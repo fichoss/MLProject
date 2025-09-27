@@ -1,0 +1,22 @@
+name: Telco_Churn_MLProject
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      input_path: {type: str, default: "telco_preprocessing"}
+      train_file: {type: str, default: "train.csv"}
+      test_file: {type: str, default: "test.csv"}
+      output_dir: {type: str, default: "outputs"}
+      n_estimators: {type: int, default: 100}
+      max_depth: {type: int, default: 10}
+      random_state: {type: int, default: 42}
+    command: >
+      python modelling.py
+      --input_path {input_path}
+      --train_file {train_file}
+      --test_file {test_file}
+      --output_dir {output_dir}
+      --n_estimators {n_estimators}
+      --max_depth {max_depth}
+      --random_state {random_state}
