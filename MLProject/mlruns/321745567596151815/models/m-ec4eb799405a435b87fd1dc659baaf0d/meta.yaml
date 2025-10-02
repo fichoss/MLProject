@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/LENOVO/Documents/Workflow-CI/MLProject/mlruns/321745567596151815/models/m-ec4eb799405a435b87fd1dc659baaf0d/artifacts
+creation_timestamp: 1758989902301
+experiment_id: '321745567596151815'
+last_updated_timestamp: 1758989914459
+model_id: m-ec4eb799405a435b87fd1dc659baaf0d
+model_type: null
+name: model
+source_run_id: 2415ffa108d64e4ba8dfaa1df2b2b481
+status: 2
+status_message: null
